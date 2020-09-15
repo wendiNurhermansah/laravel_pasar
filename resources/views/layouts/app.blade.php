@@ -31,7 +31,7 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
 <div id="app">
     <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
         <section class="sidebar">
-            <div class=" mt-3 mb-3 ml-2">
+            <div class=" mt-3 mb-3">
                 <img src="{{ asset('images/logo/'.$template->logo) }}" class="mx-auto d-block" width="100" alt="Logo Top">
             </div>
             <div class="relative">
