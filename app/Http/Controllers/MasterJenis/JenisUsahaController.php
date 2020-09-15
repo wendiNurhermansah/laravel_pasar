@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 // Model
-use App\Models\JenisLapak;
+use App\Models\JenisUsaha;
 
-class JenisLapakController extends Controller
+class JenisUsahaController extends Controller
 {
-    protected $route = 'master-jenis.jenisLapak.';
-    protected $view  = 'pages.masterJenis.lapak.';
-    protected $title = 'Jenis Lapak';
+    protected $route = 'master-jenis.jenisUsaha.';
+    protected $view  = 'pages.masterJenis.usaha.';
+    protected $title = 'Jenis Usaha';
 
     public function index()
     {
@@ -29,8 +29,8 @@ class JenisLapakController extends Controller
 
     public function api()
     {
-        $jenisLapak = JenisLapak::all();
-        return DataTables::of($jenisLapak)
+        $jenisUsaha = JenisUsaha::all();
+        return DataTables::of($jenisUsaha)
             ->addColumn('action', function ($p) {
                 return "
                 <a href='#' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
@@ -44,12 +44,12 @@ class JenisLapakController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nm_jenis_lapak' => 'required'
+            'nm_kategori' => 'required'
         ]);
 
-        $jenisLapak = new JenisLapak();
-        $jenisLapak->nm_jenis_lapak = $request->nm_jenis_lapak;
-        $jenisLapak->save();
+        $jenisUsaha = new JenisUsaha();
+        $jenisUsaha->nm_kategori = $request->nm_kategori;
+        $jenisUsaha->save();
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil tersimpan.'
@@ -58,20 +58,20 @@ class JenisLapakController extends Controller
 
     public function edit($id)
     {
-        $jenisLapak = JenisLapak::findOrFail($id);
+        $jenisUsaha = JenisUsaha::findOrFail($id);
 
-        return $jenisLapak;
+        return $jenisUsaha;
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nm_jenis_lapak' => 'required'
+            'nm_kategori' => 'required'
         ]);
 
-        $jenisLapak = JenisLapak::find($id);
-        $jenisLapak->update([
-            'nm_jenis_lapak' => $request->nm_jenis_lapak
+        $jenisUsaha = JenisUsaha::find($id);
+        $jenisUsaha->update([
+            'nm_kategori' => $request->nm_kategori
         ]);
 
         return response()->json([
@@ -81,7 +81,7 @@ class JenisLapakController extends Controller
 
     public function destroy($id)
     {
-        JenisLapak::destroy($id);
+        JenisUsaha::destroy($id);
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil dihapus.'

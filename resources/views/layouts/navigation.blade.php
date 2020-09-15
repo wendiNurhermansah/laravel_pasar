@@ -35,8 +35,8 @@
         </a>
     </li>
     <li class="no-b">
-        <a href="{{ route('blank-page') }}">
-            <i class="icon icon-settings text-success s-18"></i> 
+        <a href="{{ route('master-jenis.jenisUsaha.index') }}">
+            <i class="icon icon-store_mall_directory purple-text s-18"></i> 
             <span>Jenis Usaha</span>
         </a>
     </li>

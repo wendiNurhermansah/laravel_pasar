@@ -43,8 +43,8 @@
                             <div class="form-row form-inline">
                                 <div class="col-md-12">
                                     <div class="form-group m-0">
-                                        <label for="nm_jenis_lapak" class="col-form-label s-12 col-md-4">Nama</label>
-                                        <input type="text" name="nm_jenis_lapak" id="nm_jenis_lapak" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                        <label for="nm_kategori" class="col-form-label s-12 col-md-4">Nama</label>
+                                        <input type="text" name="nm_kategori" id="nm_kategori" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
                                     <div class="mt-2" style="margin-left: 34%">
                                         <button type="submit" class="btn btn-primary btn-sm" id="action"><i class="icon-save mr-2"></i>Simpan<span id="txtAction"></span></button>
@@ -72,7 +72,7 @@
         },
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-            {data: 'nm_jenis_lapak', name: 'nm_jenis_lapak'},
+            {data: 'nm_kategori', name: 'nm_kategori'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });
@@ -84,7 +84,7 @@
         $('input[name=_method]').val('POST');
         $('#txtAction').html('');
         $('#reset').show();
-        $('#nm_jenis_lapak').focus();
+        $('#nm_kategori').focus();
     }
 
     add();
@@ -126,7 +126,7 @@
         $('input[name=_method]').val('PATCH');
         $.get("{{ route($route.'edit', ':id') }}".replace(':id', id), function(data){
             $('#id').val(data.id);
-            $('#nm_jenis_lapak').val(data.nm_jenis_lapak).focus();
+            $('#nm_kategori').val(data.nm_kategori).focus();
         }, "JSON").fail(function(){
             reload();
         });

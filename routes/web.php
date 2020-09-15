@@ -80,5 +80,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Jenis Lapak
         Route::resource('jenisLapak', 'JenisLapakController');
         Route::post('jenisLapak/api', 'JenisLapakController@api')->name('jenisLapak.api');
+        // Jenis Usaha
+        Route::resource('jenisUsaha', 'JenisUsahaController');
+        Route::post('jenisUsaha/api', 'JenisUsahaController@api')->name('jenisUsaha.api');
     });
 });
