@@ -42,7 +42,7 @@
                                                 <select>
                                             </div>
                                         </div>
-                                        <div class="mt-3" style="margin-left: 28%">
+                                        <div class="mt-3" style="margin-left: 27%">
                                             <button type="submit" class="btn btn-primary btn-sm" id="action2"><i class="icon-save mr-2"></i>Simpan</button>
                                         </div>
                                     </div>
