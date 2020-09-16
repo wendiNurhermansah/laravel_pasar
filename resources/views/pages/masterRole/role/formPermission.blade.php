@@ -21,10 +21,10 @@
         </div>
     </header>
     <div class="container-fluid my-3">
+        <div id="alert"></div>
         <div class="card no-b">
             <div class="card-body">
                 <div id="formPermission">
-                    <div id="alert"></div>
                     <div class="row">
                         <div class="col-6">
                             <form class="needs-validation" id="form" method="POST" novalidate>

@@ -27,6 +27,7 @@
         </a>
     </li>
     @endcan
+    @can('master-jenis')
     <li class="header light"><strong>MASTER JENIS</strong></li>
     <li>
         <a href="{{ route('master-jenis.jenisLapak.index') }}">
@@ -40,4 +41,44 @@
             <span>Jenis Usaha</span>
         </a>
     </li>
+    @endcan
+    @can('master-pedagang')
+    <li class="header light"><strong>MASTER PEDAGANG</strong></li>
+    <li>
+        <a href="{{ route('blank-page') }}">
+            <i class="icon icon-address-card-o amber-text s-18"></i> 
+            <span>Pedagang</span>
+        </a>
+    </li>
+    <li class="no-b">
+        <a href="{{ route('blank-page') }}">
+            <i class="icon icon-address-card-o text-success  s-18"></i> 
+            <span>Pedagang Alamat</span>
+        </a>
+    </li>
+    @endcan
+    @can('master-pasar')
+    <li class="header light"><strong>MASTER PASAR</strong></li>
+    <li>
+        <a href="{{ route('blank-page') }}">
+            <i class="icon icon-local_convenience_store text-danger s-18"></i> 
+            <span>Pasar</span>
+        </a>
+    </li>
+    <li class="no-b">
+        <a href="{{ route('blank-page') }}">
+            <i class="icon icon-local_convenience_store text-primary s-18"></i> 
+            <span>Pasar Kategori</span>
+        </a>
+    </li>
+    @endcan
+    @can('master-transaksi')
+    <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
+    <li>
+        <a href="{{ route('blank-page') }}">
+            <i class="icon icon-dollar amber-text s-18 mr-2"></i> 
+            <span>Transaksi</span>
+        </a>
+    </li>
+    @endcan
 </ul>
