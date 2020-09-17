@@ -24,8 +24,7 @@ class PedagangAlamatController extends Controller
         $route = $this->route;
         $title = $this->title;
 
-        $exist       = PedagangAlamat::select('tm_pedagang_id')->get()->toArray();
-        $pedagang    = Pedagang::select('id', 'nm_pedagang')->whereNotIn('id', $exist)->orderBy('nm_pedagang', 'ASC')->get();
+        $pedagang    = Pedagang::select('id', 'nm_pedagang')->orderBy('nm_pedagang', 'ASC')->get();
         $alamatToko  = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
 
         return view($this->view . 'index', compact(
@@ -59,7 +58,7 @@ class PedagangAlamatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tm_pedagang_id' => 'required',
+            'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id',
             'tm_pasar_kategori_id' => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko',
             'nm_blok' => 'required',
@@ -125,22 +124,46 @@ class PedagangAlamatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tm_pedagang_id' => 'required',
+            'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id,' . $id,
             'tm_pasar_kategori_id' => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko,' . $id,
-            'kd_toko' => 'required',
             'nm_blok' => 'required',
             'tgl_tinggal' => 'required',
             'status' => 'required'
         ]);
 
+        /**
+         * Tahapan :
+         * 1. tm_pedagang_alamats
+         * 2. tm_pasar_kategoris
+         */
+
+        //  Tahap 1
         $tm_pedagang_id = $request->tm_pedagang_id;
         $tm_pasar_kategori_id = $request->tm_pasar_kategori_id;
         $nm_toko = $request->nm_toko;
-        $kd_toko = $request->kd_toko;
         $nm_blok = $request->nm_blok;
         $tgl_tinggal = $request->tgl_tinggal;
         $status = $request->status;
+
+        // add jumlah -1
+        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah + 1 WHERE id = "' . $tm_pasar_kategori_id . '"');
+
+        // generate kd_toko
+        $check  = PasarKategori::find($tm_pasar_kategori_id);
+        $digit1 = $check->pasar->id;
+        if (\strlen($digit1) == 1) {
+            $digit1 = 0 . $digit1;
+        }
+        $digit2 = $check->jenisLapak->id;
+        if (\strlen($digit2) == 1) {
+            $digit2 = 0 . $digit2;
+        }
+        $digit3 = $check->pasar->id_kel;
+        if (\strlen($digit3) == 1) {
+            $digit3 = 0 . $digit3;
+        }
+        $kd_toko = $digit1 . $digit2 . $digit3;
 
         $pedagangAlamat = PedagangAlamat::find($id);
         $pedagangAlamat->update([
@@ -152,6 +175,10 @@ class PedagangAlamatController extends Controller
             'tgl_tinggal' => $tgl_tinggal,
             'status' => $status
         ]);
+
+        // Tahap 2
+        $latestData = PedagangAlamat::select('tm_pasar_kategori_id')->latest('updated_at')->first();
+        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah - 1 WHERE id = "' . $latestData->tm_pasar_kategori_id . '"');
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
