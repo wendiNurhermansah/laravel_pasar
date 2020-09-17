@@ -45,7 +45,7 @@
     @can('master-pedagang')
     <li class="header light"><strong>MASTER PEDAGANG</strong></li>
     <li>
-        <a href="{{ route('blank-page') }}">
+        <a href="{{ route('master-pedagang.pedagang.index') }}">
             <i class="icon icon-address-card-o amber-text s-18"></i> 
             <span>Pedagang</span>
         </a>

@@ -84,4 +84,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('jenisUsaha', 'JenisUsahaController');
         Route::post('jenisUsaha/api', 'JenisUsahaController@api')->name('jenisUsaha.api');
     });
+
+    /**
+     * Master Pedagang
+     */
+    Route::prefix('Master-Pedagang')->namespace('MasterPedagang')->name('master-pedagang.')->group(function () {
+        // Pedagang
+        Route::resource('pedagang', 'PedagangController');
+        Route::post('pedagang/api', 'PedagangController@api')->name('pedagang.api');
+    });
 });
