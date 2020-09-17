@@ -51,7 +51,7 @@
         </a>
     </li>
     <li class="no-b">
-        <a href="{{ route('blank-page') }}">
+        <a href="{{ route('master-pedagang.pedagangAlamat.index') }}">
             <i class="icon icon-address-card-o text-success  s-18"></i> 
             <span>Pedagang Alamat</span>
         </a>

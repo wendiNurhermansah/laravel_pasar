@@ -92,5 +92,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Pedagang
         Route::resource('pedagang', 'PedagangController');
         Route::post('pedagang/api', 'PedagangController@api')->name('pedagang.api');
+        // Pedagang Alamat
+        Route::resource('pedagangAlamat', 'PedagangAlamatController');
+        Route::post('pedagangAlamat/api', 'PedagangAlamatController@api')->name('pedagangAlamat.api');
     });
 });
