@@ -141,13 +141,14 @@ class PedagangAlamatController extends Controller
         //  Tahap 1
         $tm_pedagang_id = $request->tm_pedagang_id;
         $tm_pasar_kategori_id = $request->tm_pasar_kategori_id;
+        $oldValue = $request->old('tm_pasar_kategori_id');
         $nm_toko = $request->nm_toko;
         $nm_blok = $request->nm_blok;
         $tgl_tinggal = $request->tgl_tinggal;
         $status = $request->status;
 
         // add jumlah -1
-        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah + 1 WHERE id = "' . $tm_pasar_kategori_id . '"');
+        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah - 1 WHERE id = "' . $tm_pasar_kategori_id . '"');
 
         // generate kd_toko
         $check  = PasarKategori::find($tm_pasar_kategori_id);
@@ -177,8 +178,7 @@ class PedagangAlamatController extends Controller
         ]);
 
         // Tahap 2
-        $latestData = PedagangAlamat::select('tm_pasar_kategori_id')->latest('updated_at')->first();
-        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah - 1 WHERE id = "' . $latestData->tm_pasar_kategori_id . '"');
+        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah + 1 WHERE id = "' . $oldValue . '"');
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
