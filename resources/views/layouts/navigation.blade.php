@@ -75,7 +75,7 @@
     @can('master-transaksi')
     <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
     <li>
-        <a href="{{ route('blank-page') }}">
+        <a href="{{ route('master-transaksi.transaksi.index') }}">
             <i class="icon icon-dollar amber-text s-18 mr-2"></i> 
             <span>Transaksi</span>
         </a>

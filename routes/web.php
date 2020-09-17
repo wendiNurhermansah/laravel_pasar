@@ -96,4 +96,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('pedagangAlamat', 'PedagangAlamatController');
         Route::post('pedagangAlamat/api', 'PedagangAlamatController@api')->name('pedagangAlamat.api');
     });
+
+    Route::prefix('Master-Transaksi')->namespace('MasterTransaksi')->name('master-transaksi.')->group(function () {
+        // Transaksi
+        Route::resource('transaksi', 'TransaksiController');
+        Route::post('transaksi/api', 'TransaksiController@api')->name('transaksi.api');
+    });
 });
