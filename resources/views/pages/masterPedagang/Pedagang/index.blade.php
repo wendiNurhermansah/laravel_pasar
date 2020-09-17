@@ -80,6 +80,7 @@
     var table = $('#dataTable').dataTable({
         processing: true,
         serverSide: true,
+        pageLength: 15,
         order: [ 1, 'asc' ],
         ajax: {
             url: "{{ route($route.'api') }}",
