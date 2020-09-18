@@ -24,8 +24,8 @@ class PedagangAlamatController extends Controller
         $route = $this->route;
         $title = $this->title;
 
-        $pedagang    = Pedagang::select('id', 'nm_pedagang')->orderBy('nm_pedagang', 'ASC')->get();
-        $alamatToko  = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
+        $pedagang   = Pedagang::select('id', 'nm_pedagang')->orderBy('nm_pedagang', 'ASC')->get();
+        $alamatToko = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
 
         return view($this->view . 'index', compact(
             'route',
@@ -45,14 +45,28 @@ class PedagangAlamatController extends Controller
                 <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus Role'><i class='icon-remove'></i></a>";
             })
             ->editColumn('tm_pedagang_id', function ($p) {
-                return $p->pedagang->nm_pedagang;
+                return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Show Data'>" . $p->pedagang->nm_pedagang . "</a>";
             })
             ->editColumn('tm_pasar_kategori_id', function ($p) {
                 return $p->pasarkategori->pasar->nm_pasar;
             })
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'tm_pedagang_id'])
             ->toJson();
+    }
+
+    public function show($id)
+    {
+        $route = $this->route;
+        $title = $this->title;
+
+        $pedagangAlamat = PedagangAlamat::findOrFail($id);
+
+        return view($this->view . 'show', compact(
+            'route',
+            'title',
+            'pedagangAlamat'
+        ));
     }
 
     public function store(Request $request)
