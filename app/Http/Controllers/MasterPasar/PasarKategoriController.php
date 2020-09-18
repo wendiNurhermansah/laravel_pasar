@@ -99,4 +99,39 @@ class PasarKategoriController extends Controller
 
         return $pasarkategori;
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tm_pasar_id'       => 'required',
+            'tm_jenis_lapak_id' => 'required',
+            'luas'      => 'required',
+            'ukuran'    => 'required',
+            'retribusi' => 'required',
+            'jumlah'    => 'required'
+        ]);
+
+        $pasarkategori = PasarKategori::find($id);
+        $pasarkategori->update([
+            'tm_pasar_id' => $request->tm_pasar_id,
+            'tm_jenis_lapak_id' => $request->tm_jenis_lapak_id,
+            'luas' => $request->luas,
+            'ukuran' => $request->ukuran,
+            'retribusi' => $request->retribusi,
+            'jumlah' => $request->jumlah
+        ]);
+
+        return response()->json([
+            'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        PasarKategori::destroy($id);
+
+        return response()->json([
+            'message' => 'Data ' . $this->title . ' berhasil dihapus.'
+        ]);
+    }
 }
