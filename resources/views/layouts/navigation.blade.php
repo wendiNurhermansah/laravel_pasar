@@ -66,7 +66,7 @@
         </a>
     </li>
     <li class="no-b">
-        <a href="{{ route('blank-page') }}">
+        <a href="{{ route('master-pasar.pasarKategori.index') }}">
             <i class="icon icon-local_convenience_store text-primary s-18"></i> 
             <span>Pasar Kategori</span>
         </a>

@@ -12,6 +12,13 @@
                     </h4>
                 </div>
             </div>
+            <div class="row justify-content-between">
+                <ul role="tablist" class="nav nav-material nav-material-white responsive-tab">
+                    <li>
+                        <a class="nav-link" href="{{ route($route.'index') }}"><i class="icon icon-arrow_back"></i>Semua Data</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
     <div class="container-fluid relative animatedParent animateOnce">

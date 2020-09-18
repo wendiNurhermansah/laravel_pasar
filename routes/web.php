@@ -102,4 +102,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('transaksi', 'TransaksiController');
         Route::post('transaksi/api', 'TransaksiController@api')->name('transaksi.api');
     });
+
+    /**
+     * Master Pasar
+     */
+    Route::prefix('Master-Pasar')->namespace('MasterPasar')->name('master-pasar.')->group(function () {
+        // pasar
+        Route::resource('pasarKategori', 'PasarKategoriController');
+        Route::post('pasarKategori/api', 'PasarKategoriController@api')->name('pasarKategori.api');
+    });
 });
