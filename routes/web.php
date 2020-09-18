@@ -107,7 +107,10 @@ Route::group(['middleware' => ['auth']], function () {
      * Master Pasar
      */
     Route::prefix('Master-Pasar')->namespace('MasterPasar')->name('master-pasar.')->group(function () {
-        // pasar
+        // Pasar
+        Route::resource('pasar', 'PasarController');
+        Route::post('pasar/api', 'PasarController@api')->name('pasar.api');
+        // Pasar Kategori
         Route::resource('pasarKategori', 'PasarKategoriController');
         Route::post('pasarKategori/api', 'PasarKategoriController@api')->name('pasarKategori.api');
     });

@@ -60,7 +60,7 @@
     @can('master-pasar')
     <li class="header light"><strong>MASTER PASAR</strong></li>
     <li>
-        <a href="{{ route('blank-page') }}">
+        <a href="{{ route('master-pasar.pasar.index') }}">
             <i class="icon icon-local_convenience_store text-danger s-18"></i> 
             <span>Pasar</span>
         </a>
