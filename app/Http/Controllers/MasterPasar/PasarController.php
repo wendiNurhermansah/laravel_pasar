@@ -43,4 +43,18 @@ class PasarController extends Controller
             ->rawColumns(['action', 'nm_pasar'])
             ->toJson();
     }
+
+    public function show($id)
+    {
+        $route = $this->route;
+        $title = $this->title;
+
+        $pasar = Pasar::find($id);
+
+        return view($this->view . 'show', compact(
+            'route',
+            'title',
+            'pasar'
+        ));
+    }
 }
