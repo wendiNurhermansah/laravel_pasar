@@ -72,12 +72,12 @@ class PedagangAlamatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id',
             'tm_pasar_kategori_id' => 'required',
+            'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id',
+            'tgl_tinggal'    => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko',
             'nm_blok' => 'required',
-            'tgl_tinggal' => 'required',
-            'status' => 'required'
+            'status'  => 'required'
         ]);
 
         /**
@@ -87,12 +87,12 @@ class PedagangAlamatController extends Controller
          */
 
         //  Tahap 1
-        $tm_pedagang_id = $request->tm_pedagang_id;
         $tm_pasar_kategori_id = $request->tm_pasar_kategori_id;
+        $tm_pedagang_id = $request->tm_pedagang_id;
+        $tgl_tinggal    = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
         $nm_blok = $request->nm_blok;
-        $tgl_tinggal = $request->tgl_tinggal;
-        $status = $request->status;
+        $status  = $request->status;
 
         // generate kd_toko
         $check  = PasarKategori::find($tm_pasar_kategori_id);
@@ -111,13 +111,13 @@ class PedagangAlamatController extends Controller
         $kd_toko = $digit1 . $digit2 . $digit3;
 
         $pedagangAlamat = new PedagangAlamat();
-        $pedagangAlamat->tm_pedagang_id = $tm_pedagang_id;
         $pedagangAlamat->tm_pasar_kategori_id = $tm_pasar_kategori_id;
+        $pedagangAlamat->tm_pedagang_id = $tm_pedagang_id;
+        $pedagangAlamat->tgl_tinggal    = $tgl_tinggal;
         $pedagangAlamat->nm_toko = $nm_toko;
         $pedagangAlamat->kd_toko = $kd_toko;
         $pedagangAlamat->nm_blok = $nm_blok;
-        $pedagangAlamat->tgl_tinggal = $tgl_tinggal;
-        $pedagangAlamat->status = $status;
+        $pedagangAlamat->status  = $status;
         $pedagangAlamat->save();
 
         // Tahap 2
@@ -139,60 +139,26 @@ class PedagangAlamatController extends Controller
     {
         $request->validate([
             'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id,' . $id,
-            'tm_pasar_kategori_id' => 'required',
+            'tgl_tinggal'    => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko,' . $id,
             'nm_blok' => 'required',
-            'tgl_tinggal' => 'required',
-            'status' => 'required'
+            'status'  => 'required'
         ]);
 
-        /**
-         * Tahapan :
-         * 1. tm_pedagang_alamats
-         * 2. tm_pasar_kategoris
-         */
-
-        //  Tahap 1
         $tm_pedagang_id = $request->tm_pedagang_id;
-        $tm_pasar_kategori_id = $request->tm_pasar_kategori_id;
-        $oldValue = $request->old('tm_pasar_kategori_id');
+        $tgl_tinggal    = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
         $nm_blok = $request->nm_blok;
-        $tgl_tinggal = $request->tgl_tinggal;
-        $status = $request->status;
-
-        // add jumlah -1
-        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah - 1 WHERE id = "' . $tm_pasar_kategori_id . '"');
-
-        // generate kd_toko
-        $check  = PasarKategori::find($tm_pasar_kategori_id);
-        $digit1 = $check->pasar->id;
-        if (\strlen($digit1) == 1) {
-            $digit1 = 0 . $digit1;
-        }
-        $digit2 = $check->jenisLapak->id;
-        if (\strlen($digit2) == 1) {
-            $digit2 = 0 . $digit2;
-        }
-        $digit3 = $check->pasar->id_kel;
-        if (\strlen($digit3) == 1) {
-            $digit3 = 0 . $digit3;
-        }
-        $kd_toko = $digit1 . $digit2 . $digit3;
+        $status  = $request->status;
 
         $pedagangAlamat = PedagangAlamat::find($id);
         $pedagangAlamat->update([
             'tm_pedagang_id' => $tm_pedagang_id,
-            'tm_pasar_kategori_id' => $tm_pasar_kategori_id,
+            'tgl_tinggal'    => $tgl_tinggal,
             'nm_toko' => $nm_toko,
-            'kd_toko' => $kd_toko,
             'nm_blok' => $nm_blok,
-            'tgl_tinggal' => $tgl_tinggal,
-            'status' => $status
+            'status'  => $status
         ]);
-
-        // Tahap 2
-        DB::update('UPDATE tm_pasar_kategoris SET jumlah = jumlah + 1 WHERE id = "' . $oldValue . '"');
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'

@@ -142,6 +142,7 @@
         $('#tm_pedagang_id').trigger('change.select2');
         $('#status').val("");
         $('#status').trigger('change.select2');
+        $('#tm_pasar_kategori_id').removeAttr('disabled');
         $('#tm_pasar_kategori_id').val("");
         $('#tm_pasar_kategori_id').trigger('change.select2');
         $('#nm_toko').focus();
@@ -196,6 +197,7 @@
             $('#status').trigger('change.select2');
             $('#tm_pasar_kategori_id').val(data.tm_pasar_kategori_id);
             $('#tm_pasar_kategori_id').trigger('change.select2');
+            $('#tm_pasar_kategori_id').prop('disabled', 'disabled');
         }, "JSON").fail(function(){
             reload();
         });
