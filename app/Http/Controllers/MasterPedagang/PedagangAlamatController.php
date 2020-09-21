@@ -7,9 +7,10 @@ use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\JenisUsaha;
+
 // Models
 use App\Models\Pedagang;
+use App\Models\JenisUsaha;
 use App\Models\PasarKategori;
 use App\Models\PedagangAlamat;
 
