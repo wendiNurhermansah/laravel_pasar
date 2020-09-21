@@ -109,7 +109,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('Master-Pasar')->namespace('MasterPasar')->name('master-pasar.')->group(function () {
         // Pasar
         Route::resource('pasar', 'PasarController');
-        Route::post('pasar/api', 'PasarController@api')->name('pasar.api');
+        Route::prefix('pasar')->name('pasar.')->group(function () {
+            Route::post('api', 'PasarController@api')->name('api');
+            Route::get('kabupateByProvinsi/{id}', 'PasarController@kabupatenByProvinsi')->name('kabupatenByProvinsi');
+            Route::get('kecamatanByKabupaten/{id}', 'PasarController@kecamatanByKabupaten')->name('kecamatanByKabupaten');
+            Route::get('kelurahanByKecamatan/{id}', 'PasarController@kelurahanByKecamatan')->name('kelurahanByKecamatan');
+        });
         // Pasar Kategori
         Route::resource('pasarKategori', 'PasarKategoriController');
         Route::post('pasarKategori/api', 'PasarKategoriController@api')->name('pasarKategori.api');

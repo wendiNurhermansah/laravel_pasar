@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 // Modes
 use App\Models\Pasar;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 
 class PasarController extends Controller
 {
@@ -21,10 +25,28 @@ class PasarController extends Controller
         $route = $this->route;
         $title = $this->title;
 
+        $provinsi = Provinsi::select('id', 'kode', 'n_provinsi')->get();
+
         return view($this->view . 'index', compact(
             'route',
-            'title'
+            'title',
+            'provinsi'
         ));
+    }
+
+    public function kabupatenByProvinsi($provinsi_id)
+    {
+        return Kabupaten::select('id', 'n_kabupaten')->where('provinsi_id', $provinsi_id)->get();
+    }
+
+    public function kecamatanByKabupaten($kabupaten_id)
+    {
+        return Kecamatan::select('id', 'n_kecamatan')->where('kabupaten_id', $kabupaten_id)->get();
+    }
+
+    public function kelurahanByKecamatan($kecamatan_id)
+    {
+        return Kelurahan::select('id', 'n_kelurahan')->where('kecamatan_id', $kecamatan_id)->get();
     }
 
     public function api()

@@ -47,19 +47,29 @@
                             <h4 id="formTitle">Tambah Data</h4><hr>
                             <div class="form-row form-inline">
                                 <div class="col-md-12">
-                                    <div class="form-group m-t-5">
+                                    <div class="form-group m-0">
                                         <label for="nm_pasar" class="col-form-label s-12 col-md-4">Nama</label>
-                                        <input type="number" name="nm_pasar" id="nm_pasar" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                        <input type="text" name="nm_pasar" id="nm_pasar" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
-                                    <div class="form-group m-t-5">
+                                    <div class="form-group m-0">
                                         <label for="luas_area" class="col-form-label s-12 col-md-4">Luas Area</label>
-                                        <input type="number" name="luas_area" id="luas_area" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                        <input type="text" name="luas_area" id="luas_area" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                    </div>
+                                    <div class="form-group m-0">
+                                        <label class="col-form-label s-12 col-md-4">Provinsi</label>
+                                        <div class="col-md-8 p-0 bg-light">
+                                            <select class="select2 form-control r-0 light s-12" name="id_prov" id="id_prov" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                @foreach ($provinsi as $i)
+                                                    <option value="{{ $i->id }}">{{ $i->n_provinsi }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group m-t-5">
-                                        <label class="col-form-label s-12 col-md-4">Kelurahan</label>
+                                        <label class="col-form-label s-12 col-md-4">Kabupaten/Kota</label>
                                         <div class="col-md-8 p-0 bg-light">
-                                            <select class="select2 form-control r-0 light s-12" name="id_kel" id="id_kel" autocomplete="off">
-                                                <option value="">Pilih</option>
+                                            <select class="select2 form-control r-0 light s-12" name="id_kab" id="id_kab" autocomplete="off">
                                             </select>
                                         </div>
                                     </div>
@@ -67,17 +77,23 @@
                                         <label class="col-form-label s-12 col-md-4">Kecamatan</label>
                                         <div class="col-md-8 p-0 bg-light">
                                             <select class="select2 form-control r-0 light s-12" name="id_kec" id="id_kec" autocomplete="off">
-                                                <option value="">Pilih</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-t-5">
-                                        <label class="col-form-label s-12 col-md-4">Kabupaten</label>
+                                        <label class="col-form-label s-12 col-md-4">Kelurahan</label>
                                         <div class="col-md-8 p-0 bg-light">
-                                            <select class="select2 form-control r-0 light s-12" name="id_kab" id="id_kab" autocomplete="off">
-                                                <option value="">Pilih</option>
+                                            <select class="select2 form-control r-0 light s-12" name="id_kel" id="id_kel" autocomplete="off">
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="form-group m-t-5">
+                                        <label for="latitude" class="col-form-label s-12 col-md-4">Latitude</label>
+                                        <input type="text" name="latitude" id="latitude" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                    </div>
+                                    <div class="form-group m-0">
+                                        <label for="longitude" class="col-form-label s-12 col-md-4">Longitude</label>
+                                        <input type="text" name="longitude" id="longitude" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
                                     <div class="mt-2" style="margin-left: 34%">
                                         <button type="submit" class="btn btn-primary btn-sm" id="action"><i class="icon-save mr-2"></i>Simpan<span id="txtAction"></span></button>
@@ -110,9 +126,91 @@
             {data: 'kd_pasar', name: 'kd_pasar'},
             {data: 'luas_area', name: 'luas_area'},
             {data: 'jumlah_lapak', name: 'jumlah_lapak'},
+            {data: 'jumlah_pedagang', name: 'jumlah_pedagang'},
             {data: 'terpakai', name: 'terpakai'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
+    });
+
+    $('#id_prov').on('change', function(){
+        val = $(this).val();
+        option = "<option value=''>&nbsp;</option>";
+        if(val == ""){
+            $('#id_kab').html(option);
+            $('#id_kec').html(option);
+            $('#id_kel').html(option);
+            selectOnChange();
+        }else{
+            $('#id_kab').html("<option value=''>Loading...</option>");
+            url = "{{ route($route.'kabupatenByProvinsi', ':id') }}".replace(':id', val);
+            $.get(url, function(data){
+                if(data){
+                    $.each(data, function(index, value){
+                        option += "<option value='" + value.id + "'>" + value.n_kabupaten +"</li>";
+                    });
+                    $('#id_kab').empty().html(option);
+
+                    $("#id_kab").val($("#id_kab option:first").val()).trigger("change.select2");
+                }else{
+                    $('#id_kab').html(option);
+                    $('#id_kec').html(option);
+                    $('#id_kel').html(option);
+                    selectOnChange();
+                }
+            }, 'JSON');
+        }
+    });
+
+    $('#id_kab').on('change', function(){
+        val = $(this).val();
+        option = "<option value=''>&nbsp;</option>";
+        if(val == ""){
+            $('#id_kec').html(option);
+            $('#id_kel').html(option);
+            selectOnChange();
+        }else{
+            $('#id_kec').html("<option value=''>Loading...</option>");
+            url = "{{ route($route.'kecamatanByKabupaten', ':id') }}".replace(':id', val);
+            $.get(url, function(data){
+                if(data){
+                    $.each(data, function(index, value){
+                        option += "<option value='" + value.id + "'>" + value.n_kecamatan +"</li>";
+                    });
+                    $('#id_kec').empty().html(option);
+
+                    $("#id_kec").val($("#id_kec option:first").val()).trigger("change.select2");
+                }else{
+                    $('#id_kec').html(option);
+                    $('#id_kel').html(option);
+                    selectOnChange();
+                }
+            }, 'JSON');
+        }
+    });
+
+    $('#id_kec').on('change', function(){
+        val = $(this).val();
+        option = "<option value=''>&nbsp;</option>";
+        if(val == ""){
+            $('#id_kel').html(option);
+            selectOnChange();
+        }else{
+            $('#id_kel').html("<option value=''>Loading...</option>");
+            url = "{{ route($route.'kelurahanByKecamatan', ':id') }}".replace(':id', val);
+            $.get(url, function(data){
+                if(data){
+                    $.each(data, function(index, value){
+                        option += "<option value='" + value.id + "'>" + value.n_kelurahan +"</li>";
+                    });
+                    $('#id_kel').empty().html(option);
+
+                    $("#id_kel").val($("#id_kel option:first").val()).trigger("change.select2");
+                }else{
+                    $('#id_kel').html(option);
+                    selectOnChange();
+                }
+            }, 'JSON');
+        }
     });
 
     function add(){
@@ -122,10 +220,14 @@
         $('input[name=_method]').val('POST');
         $('#txtAction').html('');
         $('#reset').show();
-        $('#tm_pasar_id').val("");
-        $('#tm_pasar_id').trigger('change.select2');
-        $('#tm_jenis_lapak_id').val("");
-        $('#tm_jenis_lapak_id').trigger('change.select2');
+        $('#id_prov').val("");
+        $('#id_prov').trigger('change.select2');
+        $('#id_kab').val("");
+        $('#id_kab').trigger('change.select2');
+        $('#id_kec').val("");
+        $('#id_kec').trigger('change.select2');
+        $('#id_kel').val("");
+        $('#id_kel').trigger('change.select2');
         $('#luas').focus();
     }
 
