@@ -69,7 +69,18 @@
                                         <label for="tgl_tinggal" class="col-form-label s-12 col-md-4">Tanggal Tinggal</label>
                                         <input type="text" name="tgl_tinggal" id="tgl_tinggal" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
-                                    <div class="form-group m-0">
+                                    <div class="form-group">
+                                        <label class="col-form-label s-12 col-md-4">Jenis Usaha</label>
+                                        <div class="col-md-8 p-0 bg-light">
+                                            <select class="select2 form-control r-0 light s-12" name="tm_jenis_usaha_id" id="tm_jenis_usaha_id" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                @foreach ($jenisUsaha as $i)
+                                                    <option value="{{ $i->id }}">{{ $i->nm_kategori }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-t-5">
                                         <label class="col-form-label s-12 col-md-4">Alamat Toko</label>
                                         <div class="col-md-8 p-0 bg-light">
                                             <select class="select2 form-control r-0 light s-12" name="tm_pasar_kategori_id" id="tm_pasar_kategori_id" autocomplete="off">
@@ -193,6 +204,8 @@
             $('#tgl_tinggal').val(data.tgl_tinggal);
             $('#tm_pedagang_id').val(data.tm_pedagang_id);
             $('#tm_pedagang_id').trigger('change.select2');
+            $('#tm_jenis_usaha_id').val(data.tm_jenis_usaha_id);
+            $('#tm_jenis_usaha_id').trigger('change.select2');
             $('#status').val(data.status);
             $('#status').trigger('change.select2');
             $('#tm_pasar_kategori_id').val(data.tm_pasar_kategori_id);

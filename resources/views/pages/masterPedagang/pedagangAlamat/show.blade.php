@@ -84,12 +84,16 @@
                                         <label class="col-md-3 s-12">{{ $pedagangAlamat->pasarkategori->jenisLapak->nm_jenis_lapak }}</label>
                                     </div>
                                     <div class="row">
+                                        <label class="col-md-2 text-right s-12"><strong>Jenis Usaha :</strong></label>
+                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->jenisUsaha->nm_kategori }}</label>
+                                    </div>
+                                    <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Luas :</strong></label>
-                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->pasarkategori->luas }}</label>
+                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->pasarkategori->luas }} M<sup>2</sup></label>
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>ukuran :</strong></label>
-                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->pasarkategori->ukuran }}</label>
+                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->pasarkategori->ukuran }} M</label>
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Retribusi :</strong></label>

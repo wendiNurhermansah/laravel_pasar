@@ -7,7 +7,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use App\Models\JenisUsaha;
 // Models
 use App\Models\Pedagang;
 use App\Models\PasarKategori;
@@ -26,12 +26,14 @@ class PedagangAlamatController extends Controller
 
         $pedagang   = Pedagang::select('id', 'nm_pedagang')->orderBy('nm_pedagang', 'ASC')->get();
         $alamatToko = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
+        $jenisUsaha = JenisUsaha::select('id', 'nm_kategori')->get();
 
         return view($this->view . 'index', compact(
             'route',
             'title',
             'pedagang',
-            'alamatToko'
+            'alamatToko',
+            'jenisUsaha'
         ));
     }
 
@@ -73,6 +75,7 @@ class PedagangAlamatController extends Controller
     {
         $request->validate([
             'tm_pasar_kategori_id' => 'required',
+            'tm_jenis_usaha_id'    => 'required',
             'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id',
             'tgl_tinggal'    => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko',
@@ -88,30 +91,44 @@ class PedagangAlamatController extends Controller
 
         //  Tahap 1
         $tm_pasar_kategori_id = $request->tm_pasar_kategori_id;
+        $tm_jenis_usaha_id    = $request->tm_jenis_usaha_id;
         $tm_pedagang_id = $request->tm_pedagang_id;
         $tgl_tinggal    = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
-        $nm_blok = $request->nm_blok;
+        $nm_blok = \strtoupper($request->nm_blok);
         $status  = $request->status;
 
         // generate kd_toko
-        $check  = PasarKategori::find($tm_pasar_kategori_id);
-        $digit1 = $check->pasar->id;
+        $generate  = PasarKategori::find($tm_pasar_kategori_id);
+        // Digit 1
+        $digit1 = $generate->pasar->id;
         if (\strlen($digit1) == 1) {
             $digit1 = 0 . $digit1;
         }
-        $digit2 = $check->jenisLapak->id;
+        // Digit 2
+        $digit2 = $generate->jenisLapak->id;
         if (\strlen($digit2) == 1) {
             $digit2 = 0 . $digit2;
         }
-        $digit3 = $check->pasar->id_kel;
-        if (\strlen($digit3) == 1) {
-            $digit3 = 0 . $digit3;
+        // Digit 3
+        $checkBlok  = PedagangAlamat::select('nm_blok')->where('nm_blok', $nm_blok)->first();
+        $checkPasar = PedagangAlamat::select('tm_pasar_kategori_id')->where('tm_pasar_kategori_id', $tm_pasar_kategori_id)->first();
+        $count = PedagangAlamat::select('nm_blok')->where('nm_blok', $nm_blok)->where('tm_pasar_kategori_id', $tm_pasar_kategori_id)->count();
+        if ($checkBlok != null && $checkPasar != null) {
+            $result = $count + 1;
+        } else {
+            $result = '01';
+        }
+        if (\strlen($result) == 1) {
+            $digit3 = 0 . $result;
+        } else {
+            $digit3 = $result;
         }
         $kd_toko = $digit1 . $digit2 . $digit3;
 
         $pedagangAlamat = new PedagangAlamat();
         $pedagangAlamat->tm_pasar_kategori_id = $tm_pasar_kategori_id;
+        $pedagangAlamat->tm_jenis_usaha_id    = $tm_jenis_usaha_id;
         $pedagangAlamat->tm_pedagang_id = $tm_pedagang_id;
         $pedagangAlamat->tgl_tinggal    = $tgl_tinggal;
         $pedagangAlamat->nm_toko = $nm_toko;
@@ -138,22 +155,25 @@ class PedagangAlamatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id,' . $id,
+            'tm_pedagang_id'    => 'required|unique:tm_pedagang_alamats,tm_pedagang_id,' . $id,
+            'tm_jenis_usaha_id' => 'required',
             'tgl_tinggal'    => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko,' . $id,
             'nm_blok' => 'required',
             'status'  => 'required'
         ]);
 
-        $tm_pedagang_id = $request->tm_pedagang_id;
+        $tm_pedagang_id    = $request->tm_pedagang_id;
+        $tm_jenis_usaha_id = $request->tm_jenis_usaha_id;
         $tgl_tinggal    = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
-        $nm_blok = $request->nm_blok;
+        $nm_blok = \strtoupper($request->nm_blok);
         $status  = $request->status;
 
         $pedagangAlamat = PedagangAlamat::find($id);
         $pedagangAlamat->update([
             'tm_pedagang_id' => $tm_pedagang_id,
+            'tm_jenis_usaha_id' => $tm_jenis_usaha_id,
             'tgl_tinggal'    => $tgl_tinggal,
             'nm_toko' => $nm_toko,
             'nm_blok' => $nm_blok,
