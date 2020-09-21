@@ -79,4 +79,23 @@ class PasarController extends Controller
             'pasar'
         ));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nm_pasar'  => 'required',
+            'luas_area' => 'required',
+            'id_kel' => 'required',
+            'id_kec' => 'required',
+            'id_kab' => 'required'
+        ]);
+
+        $nm_pasar  = $request->nm_pasar;
+        $luas_area = $request->luas_area;
+        $id_kel = $request->id_kel;
+        $id_kec = $request->id_kec;
+        $id_kab = $request->id_kab;
+
+        // Generate kd_pasar
+    }
 }
