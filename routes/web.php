@@ -121,4 +121,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('pasarKategori', 'PasarKategoriController');
         Route::post('pasarKategori/api', 'PasarKategoriController@api')->name('pasarKategori.api');
     });
+
+    // Test Report
+    Route::get('/report', function () {
+        return view('pages.report.index');
+    });
 });
