@@ -106,7 +106,7 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                         <p style="border-top: 1px solid black; border-right: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
                                     </div>
                                     <div class="col">
-                                        <p style="border-top: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
+                                        <p style="border-top: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">JUMLAH</p>
                                     </div>
                                 </div>
                             </div>
