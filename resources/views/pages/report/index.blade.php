@@ -28,8 +28,8 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
 <body class="light" style="font-family: Arial, Helvetica, sans-serif">
     <div class="container my-4" style="background-color:#FC8C4F !important">
         <div class="justify-content-center">
-            <div class="font-weight-bold">
-                <div class="ml-3">
+            <div class="">
+                <div class="ml-3 font-weight-bold">
                     <p class="m-0">KANTOR WILAYAH : <span class="font-weight-light">DJP JAKARTA 1</span></p>
                     <p>KANTOR PELAYANAN PBB : <span class="font-weight-light">JAKARTA CEMPAKA PUTIH</span></p>
                 </div>
@@ -44,13 +44,13 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                 <p>NO.SPPT(NOP) : <span class="font-weight-bold">xx.xx.xxx.xxx.xxx.xxx.x</span></p>
                             </div>
                             <div class="col-4">
-                                <p>NPWP : <span class="font-weight-bold">BELUM ADA</span></p>
+                                <p>NPWP : <span class="font-weight-bolder">BELUM ADA</span></p>
                             </div>
                         </div>
                     </div>
                     <div class="container" style="margin-top: -10px">
                         <div class="row">
-                            <div class="col border2 bg-transparent">
+                            <div class="col border2 bg-transparent" style="border-right: none">
                                 <p class="text-center">LETAK OBJEK PAJAK</p>
                                 <div>
                                     <p class="m-0">JL : <span class="font-weight-bold">xxxxxxxxxx</span></p>
@@ -89,22 +89,61 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row mt-2">
-                            <div class="col-2 border2 bg-transparent">
-                                <P class="text-center">OBJEK PAJAK</P>
+                        <div class="row mt-2">
+                            <div class="col-2 border2 bg-transparent" style="border-right: none">
+                                <P class="text-center mt-2">OBJEK PAJAK</P>
                             </div>
-                            <div class="col-2 border2 bg-transparent">
-                                <P class="text-center">LUAS(M2)</P>
+                            <div class="col-2 border2 bg-transparent" style="border-bottom: none; border-right: none">
+                                <P class="text-center mt-2">LUAS(M2)</P>
                             </div>
-                            <div class="col-1 border2 bg-transparent">
-                                <P class="text-center">KELAS</P>
+                            <div class="col-1 border2 bg-transparent" style="border-right: none; border-bottom: none">
+                                <P class="text-center mt-2">KELAS</P>
+                            </div>
+                            <div class="col-7 border2 bg-transparent" style="border-bottom: none">
+                                <P class="text-center m-0">NJOP(Rp)</P>
+                                <div class="row">
+                                    <div class="col">
+                                        <p style="border-top: 1px solid black; border-right: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
+                                    </div>
+                                    <div class="col">
+                                        <p style="border-top: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 border2 bg-transparent" style="border-top: none; border-right: none">
+                                <P class="m-0">BUMI</P>
+                                <P>BANGUNAN</P>
+                            </div>
+                            <div class="col-2 border2 bg-transparent" style="border-right: none">
+                                <P class="m-0 text-right">972</P>
+                                <P class="text-right">1.064</P>
+                            </div>
+                            <div class="col-1 border2 bg-transparent" style="border-right: none">
+                                <P class="text-center m-0">B49</P>
+                                <P class="text-center">A02</P>
                             </div>
                             <div class="col-7 border2 bg-transparent">
-                                <P class="text-center m-0">NJOP(Rp)</P>
-                                
-                                <p style="border-top: 1px solid black; width: 105%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="pr-3" style="border-right: 1px solid black; height: 100%; margin-right: -15px">
+                                            <p class="text-right m-0">3.745.000</p>
+                                            <p class="text-right">968.000</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-center m-0">3.640.140.000</p>
+                                        <p class="text-center">1.029.111.000</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        <div class="row">
+                            <div class="col border2 bg-transparent" style="border-top: none">
+                               
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
