@@ -93,20 +93,20 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                             <div class="col-2 border2 bg-transparent" style="border-right: none">
                                 <P class="text-center mt-2">OBJEK PAJAK</P>
                             </div>
-                            <div class="col-2 border2 bg-transparent" style="border-bottom: none; border-right: none">
+                            <div class="col-2 border2 bg-transparent" style="border-right: none">
                                 <P class="text-center mt-2">LUAS(M2)</P>
                             </div>
-                            <div class="col-1 border2 bg-transparent" style="border-right: none; border-bottom: none">
+                            <div class="col-1 border2 bg-transparent" style="border-right: none">
                                 <P class="text-center mt-2">KELAS</P>
                             </div>
-                            <div class="col-7 border2 bg-transparent" style="border-bottom: none">
+                            <div class="col-7 border2 bg-transparent" style="border-bottom: ">
                                 <P class="text-center m-0">NJOP(Rp)</P>
                                 <div class="row">
                                     <div class="col">
                                         <p style="border-top: 1px solid black; border-right: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">PER M2</p>
                                     </div>
                                     <div class="col">
-                                        <p style="border-top: 1px solid black; width: 110%; margin-left: -15px !important" class="text-center m-0">JUMLAH</p>
+                                        <p style="border-top: 1px solid black; width: 110.5%; margin-left: -15px !important" class="text-center m-0">JUMLAH</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,15 +116,15 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                 <P class="m-0">BUMI</P>
                                 <P>BANGUNAN</P>
                             </div>
-                            <div class="col-2 border2 bg-transparent" style="border-right: none">
+                            <div class="col-2 border2 bg-transparent" style="border-right: none; border-top: none">
                                 <P class="m-0 text-right">972</P>
                                 <P class="text-right">1.064</P>
                             </div>
-                            <div class="col-1 border2 bg-transparent" style="border-right: none">
+                            <div class="col-1 border2 bg-transparent" style="border-right: none; border-top: none">
                                 <P class="text-center m-0">B49</P>
                                 <P class="text-center">A02</P>
                             </div>
-                            <div class="col-7 border2 bg-transparent">
+                            <div class="col-7 border2 bg-transparent" style="border-top: none">
                                 <div class="row">
                                     <div class="col">
                                         <div class="pr-3" style="border-right: 1px solid black; height: 100%; margin-right: -15px">
@@ -132,17 +132,70 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                             <p class="text-right">968.000</p>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <p class="text-center m-0">3.640.140.000</p>
-                                        <p class="text-center">1.029.111.000</p>
+                                    <div class="col text-right">
+                                        <p class="m-0 mr-5">3.640.140.000</p>
+                                        <p class="mr-5">1.029.111.000</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col border2 bg-transparent" style="border-top: none">
-                               
+                        <div class="row border2 pb-2" style="border-top: none">
+                            <div class="col-4 bg-transparent pr-0" style="border-top: none">
+                                <p class="font-weight-bold m-0">NJOP sebagai dasar pengenaan PBB</p>
+                                <p class="m-0">NJOPTKP (NJOP Tidak Kena Pajak)</p>
+                                <p class="m-0">NJOP untuk perhitungan PBB</p>
+                                <p class="m-0">NJKP (Nilai Jual Kena Pajak)</p>
+                                <p class="m-0">Pajak Bumi dan Bangunan yang Terutang</p>
                             </div>
+                            <div class="col-1 p-0">
+                                <p class="m-0">=</p>
+                                <p class="m-0">=</p>
+                                <p class="m-0">=</p>
+                                <span class="m-0">=
+                                    <span>40%</span>
+                                </span><br>
+                                <span class="m-0">=
+                                    <span>0.5%</span>
+                                </span>
+                            </div>
+                            <div class="col-sm-1 p-0">
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">x</p>
+                                <p class="m-0">x</p>
+                            </div>
+                            <div class="col-2 p-0">
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">&nbsp;</p>
+                                <p class="m-0">4.658.092.000</p>
+                                <p class="m-0">1.863.236.000</p>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="text-right m-r-65">
+                                    <p class="m-0">4.670.092.000</p>
+                                    <p class="m-0">12.000.000</p>
+                                    <p class="m-0">4.658.092.000</p>
+                                    <p class="m-0">1.863.236.000</p>
+                                    <p class="m-0">9.316.184</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border2 pb-2" style="border-top: none">
+                            <div class="col-md-12 row">
+                                <div class="col-6">
+                                    <p class="font-weight-bold">PAJAK BUMI DAN BANGUNAN YANG HARUS DIBAYAR (Rp)</p>
+                                </div>
+                                <div class="col-6 p-0">
+                                    <div class="text-right m-r-65">
+                                        <p class="font-weight-bold">9.316.184</p>
+                                    <div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-l-15">
+                            <p class="mt-n3 mb-0">SEMBILAN JUTA TIGA RATUS ENAM BELAS RIBU SERATUS DELAPAN PULUH EMPAT RUPIH</p>
                         </div>
                     </div>
                 </div>

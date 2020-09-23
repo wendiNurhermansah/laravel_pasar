@@ -29,6 +29,7 @@
                                     <th>Jenis Bayar</th>
                                     <th>Status</th>
                                     <th>Pedagang</th>
+                                    <th width="60"></th>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -59,6 +60,7 @@
             {data: 'jenis_bayar', name: 'jenis_bayar'},
             {data: 'status_bayar', name: 'status_bayar'},
             {data: 'id_pedagang', name: 'id_pedagang'},
+            {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });
 </script>

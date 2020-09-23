@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Transaksi
         Route::resource('transaksi', 'TransaksiController');
         Route::post('transaksi/api', 'TransaksiController@api')->name('transaksi.api');
+        // Report
+        Route::resource('report', 'ReportController');
     });
 
     /**
@@ -120,10 +122,5 @@ Route::group(['middleware' => ['auth']], function () {
         // Pasar Kategori
         Route::resource('pasarKategori', 'PasarKategoriController');
         Route::post('pasarKategori/api', 'PasarKategoriController@api')->name('pasarKategori.api');
-    });
-
-    // Test Report
-    Route::get('/report', function () {
-        return view('pages.report.index');
     });
 });

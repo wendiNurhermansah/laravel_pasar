@@ -31,7 +31,11 @@ class TransaksiController extends Controller
     {
         $transaksi = Transaksi::all();
         return DataTables::of($transaksi)
+            ->addColumn('action', function ($p) {
+                return "<a href='" . route('master-transaksi.report.index') . "' onclick='remove(" . $p->id . ")' class='text-primary' title='Cetak Bukti'><i class='icon-printer2'></i></a>";
+            })
             ->addIndexColumn()
+            ->rawColumns(['action'])
             ->toJson();
     }
 }
