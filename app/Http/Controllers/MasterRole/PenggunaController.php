@@ -80,7 +80,7 @@ class PenggunaController extends Controller
             'nama'     => 'required',
             'email'    => 'required|email|unique:admin_details',
             'no_telp'  => 'required|max:13|unique:admin_details',
-            'foto'     => 'required|mimes:png,jpg,jpeg|max:1024',
+            'foto'     => 'required|mimes:png,jpg,jpeg|max:2024',
             'role_id'  => 'required'
         ]);
 

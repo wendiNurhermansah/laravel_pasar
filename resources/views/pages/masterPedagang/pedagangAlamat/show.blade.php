@@ -64,10 +64,6 @@
                                         <label class="col-md-3 s-12">{{ $pedagangAlamat->kd_toko }}</label>
                                     </div>
                                     <div class="row">
-                                        <label class="col-md-2 text-right s-12"><strong>Nama Blok :</strong></label>
-                                        <label class="col-md-3 s-12">{{ $pedagangAlamat->nm_blok }}</label>
-                                    </div>
-                                    <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Tanggal Tinggal :</strong></label>
                                         <label class="col-md-3 s-12">{{ $pedagangAlamat->tgl_tinggal }}</label>
                                     </div>
