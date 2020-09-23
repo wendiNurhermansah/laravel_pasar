@@ -74,18 +74,20 @@ class PasarKategoriController extends Controller
             'tm_pasar_id'       => 'required',
             'tm_jenis_lapak_id' => 'required',
             'luas'      => 'required',
+            'nm_blok'   => 'required',
             'ukuran'    => 'required',
             'retribusi' => 'required',
             'jumlah'    => 'required'
         ]);
 
         $pasarkategori = new PasarKategori();
-        $pasarkategori->tm_pasar_id = $request->tm_pasar_id;
+        $pasarkategori->tm_pasar_id       = $request->tm_pasar_id;
         $pasarkategori->tm_jenis_lapak_id = $request->tm_jenis_lapak_id;
-        $pasarkategori->luas = $request->luas;
-        $pasarkategori->ukuran = $request->ukuran;
+        $pasarkategori->luas    = $request->luas;
+        $pasarkategori->nm_blok = $request->nm_blok;
+        $pasarkategori->ukuran    = $request->ukuran;
         $pasarkategori->retribusi = $request->retribusi;
-        $pasarkategori->jumlah = $request->jumlah;
+        $pasarkategori->jumlah    = $request->jumlah;
         $pasarkategori->save();
 
         return response()->json([
@@ -106,6 +108,7 @@ class PasarKategoriController extends Controller
             'tm_pasar_id'       => 'required',
             'tm_jenis_lapak_id' => 'required',
             'luas'      => 'required',
+            'nm_blok'   => 'required',
             'ukuran'    => 'required',
             'retribusi' => 'required',
             'jumlah'    => 'required'
@@ -113,12 +116,13 @@ class PasarKategoriController extends Controller
 
         $pasarkategori = PasarKategori::find($id);
         $pasarkategori->update([
-            'tm_pasar_id' => $request->tm_pasar_id,
+            'tm_pasar_id'       => $request->tm_pasar_id,
             'tm_jenis_lapak_id' => $request->tm_jenis_lapak_id,
-            'luas' => $request->luas,
-            'ukuran' => $request->ukuran,
+            'luas'    => $request->luas,
+            'nm_blok' => $request->nm_blok,
+            'ukuran'  => $request->ukuran,
             'retribusi' => $request->retribusi,
-            'jumlah' => $request->jumlah
+            'jumlah'    => $request->jumlah
         ]);
 
         return response()->json([

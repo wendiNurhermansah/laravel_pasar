@@ -27,6 +27,7 @@
                                     <th>Jenis Lapak</th>
                                     <th>Luas</th>
                                     <th>Ukuran</th>
+                                    <th>Blok</th>
                                     <th>Retribusi</th>
                                     <th>Jumlah</th>
                                     <th width="60"></th>
@@ -74,6 +75,10 @@
                                         <input type="number" name="luas" id="luas" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
                                     <div class="form-group m-0">
+                                        <label for="nm_blok" class="col-form-label s-12 col-md-4">Nama Blok</label>
+                                        <input type="text" name="nm_blok" id="nm_blok" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                    </div>
+                                    <div class="form-group m-0">
                                         <label for="ukuran" class="col-form-label s-12 col-md-4">Ukuran</label>
                                         <input type="text" name="ukuran" id="ukuran" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
@@ -116,6 +121,7 @@
             {data: 'tm_jenis_lapak_id', name: 'tm_jenis_lapak_id'},
             {data: 'luas', name: 'luas'},
             {data: 'ukuran', name: 'ukuran'},
+            {data: 'nm_blok', name: 'nm_blok'},
             {data: 'retribusi', name: 'retribusi'},
             {data: 'jumlah', name: 'jumlah'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
@@ -179,6 +185,7 @@
             $('#ukuran').val(data.ukuran);
             $('#retribusi').val(data.retribusi);
             $('#jumlah').val(data.jumlah);
+            $('#nm_blok').val(data.nm_blok);
             $('#tm_pasar_id').val(data.tm_pasar_id);
             $('#tm_pasar_id').trigger('change.select2');
             $('#tm_jenis_lapak_id').val(data.tm_jenis_lapak_id);

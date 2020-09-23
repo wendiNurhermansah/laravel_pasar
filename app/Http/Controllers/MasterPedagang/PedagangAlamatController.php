@@ -26,7 +26,7 @@ class PedagangAlamatController extends Controller
         $title = $this->title;
 
         $pedagang   = Pedagang::select('id', 'nm_pedagang')->orderBy('nm_pedagang', 'ASC')->get();
-        $alamatToko = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
+        $alamatToko = PasarKategori::select('id', 'tm_pasar_id', 'tm_jenis_lapak_id', 'ukuran', 'nm_blok')->whereNotIn('jumlah', [0])->with('pasar', 'jenisLapak')->get();
         $jenisUsaha = JenisUsaha::select('id', 'nm_kategori')->get();
 
         return view($this->view . 'index', compact(
@@ -80,7 +80,6 @@ class PedagangAlamatController extends Controller
             'tm_pedagang_id' => 'required|unique:tm_pedagang_alamats,tm_pedagang_id',
             'tgl_tinggal'    => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko',
-            'nm_blok' => 'required',
             'status'  => 'required'
         ]);
 
@@ -96,7 +95,6 @@ class PedagangAlamatController extends Controller
         $tm_pedagang_id = $request->tm_pedagang_id;
         $tgl_tinggal    = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
-        $nm_blok = \strtoupper($request->nm_blok);
         $status  = $request->status;
 
         // generate kd_toko
@@ -112,10 +110,8 @@ class PedagangAlamatController extends Controller
             $digit2 = 0 . $digit2;
         }
         // Digit 3
-        $checkBlok  = PedagangAlamat::select('nm_blok')->where('nm_blok', $nm_blok)->first();
-        $checkPasar = PedagangAlamat::select('tm_pasar_kategori_id')->where('tm_pasar_kategori_id', $tm_pasar_kategori_id)->first();
-        $count = PedagangAlamat::select('nm_blok')->where('nm_blok', $nm_blok)->where('tm_pasar_kategori_id', $tm_pasar_kategori_id)->count();
-        if ($checkBlok != null && $checkPasar != null) {
+        $count = PedagangAlamat::where('tm_pasar_kategori_id', $tm_pasar_kategori_id)->count();
+        if ($count != 0) {
             $result = $count + 1;
         } else {
             $result = '01';
@@ -134,7 +130,6 @@ class PedagangAlamatController extends Controller
         $pedagangAlamat->tgl_tinggal    = $tgl_tinggal;
         $pedagangAlamat->nm_toko = $nm_toko;
         $pedagangAlamat->kd_toko = $kd_toko;
-        $pedagangAlamat->nm_blok = $nm_blok;
         $pedagangAlamat->status  = $status;
         $pedagangAlamat->save();
 
@@ -158,26 +153,23 @@ class PedagangAlamatController extends Controller
         $request->validate([
             'tm_pedagang_id'    => 'required|unique:tm_pedagang_alamats,tm_pedagang_id,' . $id,
             'tm_jenis_usaha_id' => 'required',
-            'tgl_tinggal'    => 'required',
+            'tgl_tinggal'       => 'required',
             'nm_toko' => 'required|unique:tm_pedagang_alamats,nm_toko,' . $id,
-            'nm_blok' => 'required',
             'status'  => 'required'
         ]);
 
         $tm_pedagang_id    = $request->tm_pedagang_id;
         $tm_jenis_usaha_id = $request->tm_jenis_usaha_id;
-        $tgl_tinggal    = $request->tgl_tinggal;
+        $tgl_tinggal       = $request->tgl_tinggal;
         $nm_toko = $request->nm_toko;
-        $nm_blok = \strtoupper($request->nm_blok);
         $status  = $request->status;
 
         $pedagangAlamat = PedagangAlamat::find($id);
         $pedagangAlamat->update([
-            'tm_pedagang_id' => $tm_pedagang_id,
+            'tm_pedagang_id'    => $tm_pedagang_id,
             'tm_jenis_usaha_id' => $tm_jenis_usaha_id,
-            'tgl_tinggal'    => $tgl_tinggal,
+            'tgl_tinggal'       => $tgl_tinggal,
             'nm_toko' => $nm_toko,
-            'nm_blok' => $nm_blok,
             'status'  => $status
         ]);
 

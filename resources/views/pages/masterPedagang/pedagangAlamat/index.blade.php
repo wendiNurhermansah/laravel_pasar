@@ -16,7 +16,7 @@
     </header>
     <div class="container-fluid my-3">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="card no-b">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -26,7 +26,6 @@
                                     <th>Nama Pedagang</th>
                                     <th>Nama Toko</th>
                                     <th>Kode Toko</th>
-                                    <th>Nama Blok</th>
                                     <th>Alamat Toko</th>
                                     <th width="60"></th>
                                 </thead>
@@ -36,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div id="alert"></div>
                 <div class="card no-b">
                     <div class="card-body">
@@ -58,18 +57,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-t-5">
-                                        <label for="nm_toko" class="col-form-label s-12 col-md-4">Nama Toko</label>
-                                        <input type="text" name="nm_toko" id="nm_toko" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                        <label class="col-form-label s-12 col-md-4">
+                                            Alamat Toko
+                                            <a class="ml-1 mt-1" data-toggle="popover" title="Info" data-html="true" data-content="Kolom 1 : Nama Pasar<br/>Kolom 2 : Jenis Lapak<br/>Kolom 3 : Ukuran<br/>Kolom 4 : Nama Blok">
+                                                <i class="icon icon-information2 s-18 red-text"></i>
+                                            </a>
+                                        </label>
+                                        <div class="col-md-8 p-0 bg-light">
+                                            <select class="select2 form-control r-0 light s-12" name="tm_pasar_kategori_id" id="tm_pasar_kategori_id" autocomplete="off">
+                                                <option value="">Pilih</option>
+                                                @foreach ($alamatToko as $i)
+                                                    <option value="{{ $i->id }}">{{ $i->pasar->nm_pasar }}&nbsp; [ {{ $i->jenisLapak->nm_jenis_lapak}} ] &nbsp;[ {{$i->ukuran}} ] &nbsp;[ {{$i->nm_blok}} ]</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-group m-0">
-                                        <label for="nm_blok" class="col-form-label s-12 col-md-4">Nama Blok</label>
-                                        <input type="text" name="nm_blok" id="nm_blok" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
-                                    </div>
-                                    <div class="form-group m-0">
-                                        <label for="tgl_tinggal" class="col-form-label s-12 col-md-4">Tanggal Tinggal</label>
-                                        <input type="text" name="tgl_tinggal" id="tgl_tinggal" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
-                                    </div>
-                                    <div class="form-group">
+                                    <div class="form-group m-t-5">
                                         <label class="col-form-label s-12 col-md-4">Jenis Usaha</label>
                                         <div class="col-md-8 p-0 bg-light">
                                             <select class="select2 form-control r-0 light s-12" name="tm_jenis_usaha_id" id="tm_jenis_usaha_id" autocomplete="off">
@@ -81,17 +84,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-t-5">
-                                        <label class="col-form-label s-12 col-md-4">Alamat Toko</label>
-                                        <div class="col-md-8 p-0 bg-light">
-                                            <select class="select2 form-control r-0 light s-12" name="tm_pasar_kategori_id" id="tm_pasar_kategori_id" autocomplete="off">
-                                                <option value="">Pilih</option>
-                                                @foreach ($alamatToko as $i)
-                                                    <option value="{{ $i->id }}">{{ $i->pasar->nm_pasar }}&nbsp; [ {{ $i->jenisLapak->nm_jenis_lapak}} ] &nbsp;[ {{$i->ukuran}} ]</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <label for="nm_toko" class="col-form-label s-12 col-md-4">Nama Toko</label>
+                                        <input type="text" name="nm_toko" id="nm_toko" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
-                                    <div class="form-group m-t-5">
+                                    <div class="form-group m-0">
+                                        <label for="tgl_tinggal" class="col-form-label s-12 col-md-4">Tanggal Tinggal</label>
+                                        <input type="text" name="tgl_tinggal" id="tgl_tinggal" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                    </div>
+                                    <div class="form-group m-0">
                                         <label class="col-form-label s-12 col-md-4">Status</label>
                                         <div class="col-md-8 p-0 bg-light">
                                             <select class="select2 form-control r-0 light s-12" name="status" id="status" autocomplete="off">
@@ -130,7 +130,6 @@
             {data: 'tm_pedagang_id', name: 'tm_pedagang_id'},
             {data: 'nm_toko', name: 'nm_toko'},
             {data: 'kd_toko', name: 'kd_toko'},
-            {data: 'nm_blok', name: 'nm_blok'},
             {data: 'tm_pasar_kategori_id', name: 'tm_pasar_kategori_id'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
@@ -151,12 +150,14 @@
         $('#reset').show();
         $('#tm_pedagang_id').val("");
         $('#tm_pedagang_id').trigger('change.select2');
+        $('#tm_jenis_usaha_id').val("");
+        $('#tm_jenis_usaha_id').trigger('change.select2');
         $('#status').val("");
         $('#status').trigger('change.select2');
         $('#tm_pasar_kategori_id').removeAttr('disabled');
         $('#tm_pasar_kategori_id').val("");
         $('#tm_pasar_kategori_id').trigger('change.select2');
-        $('#nm_toko').focus();
+        $('#tm_pedagang_id').focus();
     }
 
     add();
