@@ -26,7 +26,7 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
 
 </head>
 <body class="light" style="font-family: Arial, Helvetica, sans-serif">
-    <div class="container my-4" style="background-color:#FC8C4F !important">
+    <div class="container my-4 pb-3" style="background-color:#FC8C4F !important">
         <div class="justify-content-center">
             <div class="">
                 <div class="ml-3 font-weight-bold">
@@ -182,20 +182,81 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                                 </div>
                             </div>
                         </div>
-                        <div class="row border2 pb-2" style="border-top: none">
-                            <div class="col-md-12 row">
-                                <div class="col-6">
-                                    <p class="font-weight-bold">PAJAK BUMI DAN BANGUNAN YANG HARUS DIBAYAR (Rp)</p>
-                                </div>
-                                <div class="col-6 p-0">
-                                    <div class="text-right m-r-65">
-                                        <p class="font-weight-bold">9.316.184</p>
-                                    <div>
+                        <div class="row border2" style="border-top: none">
+                            <div class="col-9">
+                                <p class="font-weight-bold">PAJAK BUMI DAN BANGUNAN YANG HARUS DIBAYAR (Rp)</p>
+                            </div>
+                            <div class="col-3 text-right">
+                                <p class="font-weight-bold m-r-50">9.316.184</p>
+                            </div>
+                            <div class="m-l-15">
+                                <p class="mt-n3 mb-0">SEMBILAN JUTA TIGA RATUS ENAM BELAS RIBU SERATUS DELAPAN PULUH EMPAT RUPIH</p>
+                            </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col-6 border2" style="border-top: none; border-bottom: none">
+                                <span class="font-weight-bold">TGL JATUH TEMPO </span><span>29 AGU 2005</span>
+                                <p class="font-weight-bold m-0">TEMPAT PEMBAYARAN</p>
+                                <p class="m-0">BANK MANDIRI SEAMEN CLUB</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <p class="m-0">JAKARTA, 03 JAN 2005</p>
+                                    <span>PJ.</span><span class="font-weight-bold">KEPALA KANTOR</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-l-15">
-                            <p class="mt-n3 mb-0">SEMBILAN JUTA TIGA RATUS ENAM BELAS RIBU SERATUS DELAPAN PULUH EMPAT RUPIH</p>
+                        <div class="row">
+                            <div class="col-8 border2">
+                                <p class="m-0 font-weight-bold">SPPT DAN STTS PBB BUKAN MERUPAKAN BUKTI PEMILIKAN HAK</p>
+                                <P class="m-0 font-weight-bold">INFORMASI PADA SPPT INI ADALAH KONDISI OBJEK PAJAK PER 1 JANUARI TAHUN PAJAK</P>
+                                <p class="m-0 font-weight-bold">NJOP DIGUNAKAN UNTUK TUJUAN PERPAJAKAN</p>
+                            </div>
+                            <div class="col-4 pb-0">
+                                <p class="m-t-35 ml-1">NIP :</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="m-0">33105060203269RAAA4A4704</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3"></div>
+                <div style="background-color: #FAC2AA !important">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 border2">
+                                <div class="row">
+                                    <label class="col-md-4 m-0">NAMA WP</label>
+                                    <label class="col-md-8 m-0">: <span class="font-weight-bold">xxx xxxxx</span></label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-4 m-0">Letak Objek Pajak</label>
+                                    <label class="col-md-8 m-0">: <span>Kecamatan CEMPAKA PUTIH</span><br><span class="ml-2">Desa/Kel RAWASARI</span></label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-4 m-0">No. SPPT (NOP)</label>
+                                    <label class="col-md-8 m-0">: <span class="font-weight-bold">xx.xx.xxx.xxx.xxx.xxxx.x</span></label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-4 m-0">SPPT Tahun/Rp.</label>
+                                    <label class="col-md-8 m-0">: 2005 - 9.316.184</label>
+                                </div>
+                            </div>
+                            <div class="col-6 border2" style="border-left: none">
+                                <div class="row">
+                                    <label class="col-md-3 m-0">Diterima tgl</label>
+                                    <label class="col-md-9 m-0">: 24 September 2020</label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 m-0">Tanda Tangan</label>
+                                    <label class="col-md-9 m-0">:</label>
+                                </div>
+                                <hr class="mt-5 mb-1" style="border-top: 1px dashed">
+                                <p class="text-center">Nama Terang</p>
+                            </div>
                         </div>
                     </div>
                 </div>
