@@ -92,7 +92,12 @@
                                         <input type="text" name="tgl_tinggal" id="tgl_tinggal" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                     </div>
                                     <div class="form-group m-0">
-                                        <label class="col-form-label s-12 col-md-4">Status</label>
+                                        <label class="col-form-label s-12 col-md-4">
+                                            Status
+                                            <a class="ml-1 mt-1" data-toggle="popover" title="Info" data-html="true" data-content="Aktif : Toko Ditempati<br/>Tidak Aktif : Toko Tidak Ditempati">
+                                                <i class="icon icon-information2 s-18 red-text"></i>
+                                            </a>
+                                        </label>
                                         <div class="col-md-8 p-0 bg-light">
                                             <select class="select2 form-control r-0 light s-12" name="status" id="status" autocomplete="off">
                                                 <option value="">Pilih</option>
