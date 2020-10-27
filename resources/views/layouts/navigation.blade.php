@@ -26,6 +26,13 @@
             <span>Pengguna</span>
         </a>
     </li>
+    <li class="no-b">
+        <a href="{{ route('master-mahasiswa.mahasiswa.index') }}">
+            <i class="icon icon-school blue-text s-18"></i> 
+            <span>Mahasiswa</span>
+        </a>
+    </li>
+   
     @endcan
     @can('master-jenis')
     <li class="header light"><strong>MASTER JENIS</strong></li>

@@ -47,7 +47,29 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
                 Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
             });
+            
         });
+
+        Route::prefix('master-mahasiswa')->namespace('MasterMahasiswa')->name('master-mahasiswa.')->group(function(){
+            //Mahasiswa
+            Route::resource('mahasiswa', 'MahasiswaController');
+            Route::prefix('mahasiswa')->name('mahasiswa.')->group(function () {
+            
+                Route::get('kabupatenByProvinsi/{id}', 'MahasiswaController@kabupatenByProvinsi')->name('kabupatenByProvinsi');
+                Route::get('kecamatanByKabupaten/{id}', 'MahasiswaController@kecamatanByKabupaten')->name('kecamatanByKabupaten');
+                Route::get('kelurahanByKecamatan/{id}', 'MahasiswaController@kelurahanByKecamatan')->name('kelurahanByKecamatan');
+                //Route::get('jurusanByMahasiswa/{id}', 'MahasiswaController@jurusanByMahasiswa')->name('jurusanByMahasiswa');
+                
+                Route::post('api', 'MahasiswaController@api')->name('api');
+                Route::get('{id}/editPassword', 'MahasiswaController@editPassword')->name('editPassword');
+                Route::get('mapelByJurusan/{id}', 'MahasiswaController@mapelByJurusan')->name('mapelByJurusan');
+                
+        });
+
+           
+        });
+
+            
 
         /**
          * Config Template
